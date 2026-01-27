@@ -1,0 +1,22 @@
+run = "npm run start"
+entrypoint = "backend/src/app.ts"
+
+[nix]
+channel = "stable-24_05"
+
+[env]
+NODE_ENV = "production"
+
+[install]
+command = "npm run install:all"
+
+[build]
+command = "npm run build"
+
+[deployment]
+run = ["sh", "-c", "npm run start"]
+build = ["sh", "-c", "npm run build"]
+
+[[ports]]
+localPort = 3000
+externalPort = 80
