@@ -6,6 +6,7 @@ import { PrismaClient } from "@prisma/client";
 import { linksRoutes, redirectRoutes } from "@routes/index";
 import { errorHandler, notFoundHandler } from "@middleware/error.middleware";
 import { initRedis } from "@services/cache.service";
+import path from "node:path";
 
 const app = express();
 const prisma = new PrismaClient();
@@ -35,6 +36,13 @@ app.use("/api/links", linksRoutes);
 
 // Redirect routes (must be after API routes)
 app.use("/", redirectRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../../dist")));
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(__dirname, "../../dist/index.html"));
+  });
+}
 
 // Error handlers
 app.use(notFoundHandler);
