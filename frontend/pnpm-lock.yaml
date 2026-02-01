@@ -33,6 +33,9 @@ importers:
       '@biomejs/biome':
         specifier: ^1.8.3
         version: 1.9.4
+      '@twa-dev/types':
+        specifier: ^8.0.2
+        version: 8.0.2
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.27
@@ -510,6 +513,9 @@ packages:
 
   '@twa-dev/types@7.10.0':
     resolution: {integrity: sha512-BXHyNLXy+cPbOZ2qQq5ArPKcP4kUfuX3YBSFT0XUxtMNWAzvyMuYAiq59UTfQ8OnELXlfChrAoIT3c2pujBtcQ==}
+
+  '@twa-dev/types@8.0.2':
+    resolution: {integrity: sha512-ICQ6n4NaUPPzV3/GzflVQS6Nnu5QX2vr9OlOG8ZkFf3rSJXzRKazrLAbZlVhCPPWkIW3MMuELPsE6tByrA49qA==}
 
   '@types/d3-array@3.2.2':
     resolution: {integrity: sha512-hOLWVbm7uRza0BYXpIIW5pxfrKe0W+D5lrFiAEYR+pb6w3N2SwSMaJbXdUfSEv+dT4MfHBLtn5js0LAWaO6otw==}
@@ -1375,6 +1381,8 @@ snapshots:
       react: 18.3.1
 
   '@twa-dev/types@7.10.0': {}
+
+  '@twa-dev/types@8.0.2': {}
 
   '@types/d3-array@3.2.2': {}
 
