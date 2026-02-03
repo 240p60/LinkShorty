@@ -16,7 +16,7 @@ export function Header() {
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-lg font-bold text-white flex items-center gap-2">
             <LinkIcon />
-            Сокращатель ссылок
+            TinyMetrics - Сокращатель ссылок
           </h1>
           {user && <span className="text-sm text-gray-400">Привет, {user.first_name}</span>}
         </div>
