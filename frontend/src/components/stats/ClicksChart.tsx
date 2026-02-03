@@ -1,6 +1,6 @@
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { Card } from "@components/common/Card";
 import type { ChartDataPoint } from "@app/types";
+import { Card } from "@components/common/Card";
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 interface ClicksChartProps {
   data: ChartDataPoint[];

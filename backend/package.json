@@ -13,7 +13,7 @@
     "db:push": "prisma db push",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "biome check src/",
-    "lint:fix": "biome check src/ --apply"
+    "lint:fix": "biome check src/ --write"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

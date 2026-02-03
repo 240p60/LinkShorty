@@ -1,12 +1,12 @@
-import { useState, useCallback, type FormEvent } from "react";
-import { Card } from "@components/common/Card";
-import { Input } from "@components/common/Input";
+import type { CreateLinkInput, Link } from "@app/types";
 import { Button } from "@components/common/Button";
+import { Card } from "@components/common/Card";
+import { CopyButton } from "@components/common/CopyButton";
+import { Input } from "@components/common/Input";
+import { useTelegram } from "@hooks/useTelegram";
 import { buildShortUrl } from "@utils/generateShortCode";
 import { validateUrl } from "@utils/validators";
-import { CopyButton } from "@components/common/CopyButton";
-import { useTelegram } from "@hooks/useTelegram";
-import type { CreateLinkInput, Link } from "@app/types";
+import { type FormEvent, useCallback, useState } from "react";
 
 interface LinkGeneratorProps {
   onCreateLink: (input: CreateLinkInput) => Promise<Link>;

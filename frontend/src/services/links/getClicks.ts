@@ -1,5 +1,5 @@
-import api from "@services/api.service";
 import type { Click } from "@app/types";
+import api from "@services/api.service";
 
 interface GetClicksResponse {
   clicks: Click[];

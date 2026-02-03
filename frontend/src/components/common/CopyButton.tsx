@@ -1,6 +1,6 @@
-import { useState, useCallback } from "react";
-import { clsx } from "clsx";
 import { Button } from "@components/common/Button";
+import { clsx } from "clsx";
+import { useCallback, useState } from "react";
 
 interface CopyButtonProps {
   text: string;
@@ -47,6 +47,7 @@ export function CopyButton({ text, className, onCopy }: CopyButtonProps) {
 function CopyIcon() {
   return (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <title>Copy Icon</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -60,6 +61,7 @@ function CopyIcon() {
 function CheckIcon() {
   return (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <title>Check Icon</title>
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
     </svg>
   );

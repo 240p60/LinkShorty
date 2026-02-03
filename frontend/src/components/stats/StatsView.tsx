@@ -1,9 +1,9 @@
+import type { ChartDataPoint, Click, Link } from "@app/types";
 import { Card } from "@components/common/Card";
 import { ClicksChart } from "@components/stats/ClicksChart";
 import { ClicksTable } from "@components/stats/ClicksTable";
 import { formatNumber, truncateUrl } from "@utils/formatters";
 import { buildShortUrl } from "@utils/generateShortCode";
-import type { Link, Click, ChartDataPoint } from "@app/types";
 
 interface StatsViewProps {
   link: Link;

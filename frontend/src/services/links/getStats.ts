@@ -1,5 +1,5 @@
+import type { ChartDataPoint, Link } from "@app/types";
 import api from "@services/api.service";
-import type { Link, ChartDataPoint } from "@app/types";
 
 interface GetStatsResponse {
   link: Link;

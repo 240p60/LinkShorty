@@ -1,8 +1,8 @@
-import type { Request } from "express";
-import { PrismaClient } from "@prisma/client";
 import { Click } from "@models/click.model";
+import { PrismaClient } from "@prisma/client";
 import { hashIp } from "@utils/hash";
-import { hasIpVisited, markIpVisited, invalidateLinkCache } from "./cache.service";
+import type { Request } from "express";
+import { hasIpVisited, invalidateLinkCache, markIpVisited } from "./cache.service";
 
 const prisma = new PrismaClient();
 
@@ -93,7 +93,7 @@ export async function recordClick(shortCode: string, req: Request): Promise<Clic
  */
 export async function getClicksForLink(
   shortCode: string,
-  options: GetClicksOptions = {}
+  options: GetClicksOptions = {},
 ): Promise<ClicksResponse> {
   const { limit = 50, offset = 0 } = options;
 
@@ -121,10 +121,7 @@ export async function getClicksForLink(
 /**
  * Get clicks aggregated by day for the last N days
  */
-export async function getClicksOverTime(
-  shortCode: string,
-  days: number = 7
-): Promise<ChartDataPoint[]> {
+export async function getClicksOverTime(shortCode: string, days = 7): Promise<ChartDataPoint[]> {
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - days);
   startDate.setHours(0, 0, 0, 0);

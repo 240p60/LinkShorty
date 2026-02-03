@@ -41,7 +41,7 @@ const clickSchema = new Schema<IClick>(
   {
     timestamps: false,
     collection: "clicks",
-  }
+  },
 );
 
 // Compound index for efficient queries

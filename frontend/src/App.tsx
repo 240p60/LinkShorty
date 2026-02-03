@@ -1,7 +1,7 @@
-import { BrowserRouter } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import { Header } from "@components/Layout/Header";
 import { AppRoutes } from "@routes/AppRoutes";
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (

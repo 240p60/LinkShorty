@@ -28,6 +28,7 @@ function EmptyIcon() {
       stroke="currentColor"
       viewBox="0 0 24 24"
     >
+      <title>Empty Icon</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"

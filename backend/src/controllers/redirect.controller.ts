@@ -1,6 +1,6 @@
-import type { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
-import { getCachedLink, cacheLink, recordClick } from "@services/index";
+import { cacheLink, getCachedLink, recordClick } from "@services/index";
+import type { NextFunction, Request, Response } from "express";
 
 const prisma = new PrismaClient();
 
@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 export async function handleRedirect(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> {
   try {
     const { shortCode } = req.params;

@@ -1,5 +1,5 @@
-import { LinkCard } from "./LinkCard";
 import type { Link } from "../../types";
+import { LinkCard } from "./LinkCard";
 
 interface LinkListProps {
   links: Link[];

@@ -1,7 +1,7 @@
+import path from "node:path";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 import biomePlugin from "vite-plugin-biome";
-import path from "node:path";
 
 export default defineConfig({
   root: ".",

@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction, ErrorRequestHandler } from "express";
+import type { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 
 interface AppError extends Error {
   status?: number;
@@ -12,7 +12,7 @@ export const errorHandler: ErrorRequestHandler = (
   err: AppError,
   _req: Request,
   res: Response,
-  _next: NextFunction
+  _next: NextFunction,
 ): void => {
   console.error(`[${new Date().toISOString()}] Error:`, err.message);
 

@@ -1,5 +1,5 @@
-import { LinkList } from "@components/links/LinkList";
 import { EmptyState } from "@components/EmptyState";
+import { LinkList } from "@components/links/LinkList";
 import { useLinks } from "@hooks/useLinks";
 
 export function Links() {

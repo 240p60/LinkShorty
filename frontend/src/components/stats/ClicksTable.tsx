@@ -1,6 +1,6 @@
+import type { Click } from "@app/types";
 import { Card } from "@components/common/Card";
 import { formatDateTime } from "@utils/formatters";
-import type { Click } from "@app/types";
 
 interface ClicksTableProps {
   clicks: Click[];

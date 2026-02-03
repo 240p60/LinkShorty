@@ -1,7 +1,7 @@
 /**
  * Generate a random string of specified length
  */
-export function generateRandomString(length: number = 8): string {
+export function generateRandomString(length = 8): string {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
   for (let i = 0; i < length; i++) {
@@ -31,7 +31,7 @@ export function parseBoolean(value: unknown): boolean {
 /**
  * Truncate string to specified length
  */
-export function truncate(str: string | null | undefined, maxLength: number = 100): string {
+export function truncate(str: string | null | undefined, maxLength = 100): string {
   if (!str || str.length <= maxLength) return str || "";
-  return str.substring(0, maxLength - 3) + "...";
+  return `${str.substring(0, maxLength - 3)}...`;
 }

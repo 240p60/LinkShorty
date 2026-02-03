@@ -1,6 +1,6 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { clsx } from "clsx";
 import { useTelegram } from "@hooks/useTelegram";
+import { clsx } from "clsx";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function Header() {
   const location = useLocation();
@@ -45,6 +45,7 @@ interface NavButtonProps {
 function NavButton({ active, onClick, children }: NavButtonProps) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={clsx(
         "flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors",
@@ -59,6 +60,7 @@ function NavButton({ active, onClick, children }: NavButtonProps) {
 function LinkIcon() {
   return (
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <title>Link Icon</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -72,6 +74,7 @@ function LinkIcon() {
 function HomeIcon() {
   return (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <title>Home Icon</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -85,6 +88,7 @@ function HomeIcon() {
 function ListIcon() {
   return (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <title>List Icon</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -1,14 +1,14 @@
 // Custom hook for Telegram Web App integration
 
-import { useEffect, useState } from "react";
 import {
-  initTelegram,
   getTelegramUser,
-  isRunningInTelegram,
   hapticFeedback,
-  showConfirm,
+  initTelegram,
+  isRunningInTelegram,
   shareLink,
+  showConfirm,
 } from "@services/telegram";
+import { useEffect, useState } from "react";
 
 interface TelegramUser {
   id: number;

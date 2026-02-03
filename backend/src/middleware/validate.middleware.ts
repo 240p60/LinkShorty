@@ -1,14 +1,10 @@
-import type { Request, Response, NextFunction } from "express";
-import { isValidUrl, sanitizeUrl, isValidShortCode } from "@utils/validators";
+import { isValidShortCode, isValidUrl, sanitizeUrl } from "@utils/validators";
+import type { NextFunction, Request, Response } from "express";
 
 /**
  * Middleware to validate URL in request body
  */
-export function validateUrlMiddleware(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void {
+export function validateUrlMiddleware(req: Request, res: Response, next: NextFunction): void {
   const { original_url } = req.body as { original_url?: string };
 
   if (!original_url) {
@@ -35,11 +31,7 @@ export function validateUrlMiddleware(
 /**
  * Middleware to validate custom short code (optional)
  */
-export function validateCustomCode(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void {
+export function validateCustomCode(req: Request, res: Response, next: NextFunction): void {
   const { custom_code } = req.body as { custom_code?: string };
 
   if (custom_code) {
@@ -59,11 +51,7 @@ export function validateCustomCode(
 /**
  * Middleware to validate short code in URL params
  */
-export function validateShortCodeParam(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void {
+export function validateShortCodeParam(req: Request, res: Response, next: NextFunction): void {
   const { shortCode } = req.params;
 
   if (!shortCode || !isValidShortCode(shortCode)) {

@@ -1,14 +1,14 @@
-import type { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 import {
-  generateUniqueShortCode,
   buildShortUrl,
+  cacheLink,
+  deleteClicksForLink,
+  generateUniqueShortCode,
   getClicksForLink,
   getClicksOverTime,
-  deleteClicksForLink,
-  cacheLink,
   invalidateLinkCache,
-} from '@services/index';
+} from "@services/index";
+import type { NextFunction, Request, Response } from "express";
 
 const prisma = new PrismaClient();
 
@@ -19,7 +19,7 @@ const prisma = new PrismaClient();
 export async function createLink(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     if (!req.sanitizedUrl) {
-      res.status(400).json({ error: 'URL обязателен' });
+      res.status(400).json({ error: "URL обязателен" });
       return;
     }
     const originalUrl = req.sanitizedUrl;
@@ -64,7 +64,7 @@ export async function getAllLinks(req: Request, res: Response, next: NextFunctio
 
     const [links, total] = await Promise.all([
       prisma.link.findMany({
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: "desc" },
         skip: offset,
         take: limit,
       }),
@@ -72,7 +72,7 @@ export async function getAllLinks(req: Request, res: Response, next: NextFunctio
     ]);
 
     res.json({
-      links: links.map(link => ({
+      links: links.map((link) => ({
         id: link.id,
         short_code: link.shortCode,
         short_url: buildShortUrl(link.shortCode),
@@ -104,7 +104,7 @@ export async function getLink(req: Request, res: Response, next: NextFunction): 
 
     if (!link) {
       res.status(404).json({
-        error: 'Ссылка не найдена',
+        error: "Ссылка не найдена",
       });
       return;
     }
@@ -155,7 +155,7 @@ export async function deleteLink(req: Request, res: Response, next: NextFunction
 export async function getLinkClicks(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> {
   try {
     const { shortCode } = req.params;
@@ -169,7 +169,7 @@ export async function getLinkClicks(
 
     if (!link) {
       res.status(404).json({
-        error: 'Ссылка не найдена',
+        error: "Ссылка не найдена",
       });
       return;
     }
@@ -197,7 +197,7 @@ export async function getLinkStats(req: Request, res: Response, next: NextFuncti
 
     if (!link) {
       res.status(404).json({
-        error: 'Ссылка не найдена',
+        error: "Ссылка не найдена",
       });
       return;
     }

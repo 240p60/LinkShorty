@@ -1,6 +1,6 @@
+import { Card } from "@components/common/Card";
 import { LinkGenerator } from "@components/links/LinkGenerator";
 import { useLinks } from "@hooks/useLinks";
-import { Card } from "@components/common/Card";
 import { formatNumber } from "@utils/formatters";
 
 export function Home() {

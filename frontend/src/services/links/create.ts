@@ -1,5 +1,5 @@
+import type { CreateLinkInput, Link } from "@app/types";
 import api from "@services/api.service";
-import type { Link, CreateLinkInput } from "@app/types";
 
 export async function createLink(input: CreateLinkInput): Promise<Link> {
   const response = await api.post<Link>("/links", input);

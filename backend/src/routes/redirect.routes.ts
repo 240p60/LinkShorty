@@ -1,7 +1,7 @@
-import { Router } from "express";
 import { handleRedirect } from "@controllers/redirect.controller";
-import { validateShortCodeParam } from "@middleware/validate.middleware";
 import { redirectLimiter } from "@middleware/rateLimit.middleware";
+import { validateShortCodeParam } from "@middleware/validate.middleware";
+import { Router } from "express";
 
 const router = Router();
 

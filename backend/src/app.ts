@@ -1,13 +1,13 @@
 import "dotenv/config";
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import { PrismaClient } from "@prisma/client";
-import { linksRoutes, redirectRoutes } from "@routes/index";
-import { errorHandler, notFoundHandler } from "@middleware/error.middleware";
-import { initRedis } from "@services/cache.service";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { errorHandler, notFoundHandler } from "@middleware/error.middleware";
+import { PrismaClient } from "@prisma/client";
+import { linksRoutes, redirectRoutes } from "@routes/index";
+import { initRedis } from "@services/cache.service";
+import cors from "cors";
+import express from "express";
+import mongoose from "mongoose";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: process.env.CORS_ORIGIN || "*",
     credentials: true,
-  })
+  }),
 );
 
 // Parse JSON bodies

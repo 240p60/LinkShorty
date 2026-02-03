@@ -1,5 +1,5 @@
-import api from "@services/api.service";
 import type { Link } from "@app/types";
+import api from "@services/api.service";
 
 interface GetAllLinksResponse {
   links: Link[];

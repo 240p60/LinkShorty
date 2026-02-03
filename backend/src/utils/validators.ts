@@ -27,7 +27,7 @@ export function sanitizeUrl(url: string | null | undefined): string | null {
   if (!url) return null;
   // Trim whitespace
   let sanitized = url.trim();
-  // Remove any null bytes or control characters
+  // biome-ignore lint/suspicious/noControlCharactersInRegex: <explanation>
   sanitized = sanitized.replace(/[\x00-\x1f\x7f]/g, "");
   return sanitized;
 }

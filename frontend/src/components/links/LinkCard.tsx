@@ -1,12 +1,12 @@
+import type { Link } from "@app/types";
+import { Button } from "@components/common/Button";
+import { Card } from "@components/common/Card";
+import { CopyButton } from "@components/common/CopyButton";
+import { useTelegram } from "@hooks/useTelegram";
+import { formatNumber, getRelativeTime, truncateUrl } from "@utils/formatters";
+import { buildShortUrl } from "@utils/generateShortCode";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card } from "@components/common/Card";
-import { Button } from "@components/common/Button";
-import { CopyButton } from "@components/common/CopyButton";
-import { truncateUrl, getRelativeTime, formatNumber } from "@utils/formatters";
-import { buildShortUrl } from "@utils/generateShortCode";
-import { useTelegram } from "@hooks/useTelegram";
-import type { Link } from "@app/types";
 
 interface LinkCardProps {
   link: Link;

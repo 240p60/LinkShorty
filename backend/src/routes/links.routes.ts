@@ -1,18 +1,18 @@
-import { Router } from "express";
 import {
   createLink,
+  deleteLink,
   getAllLinks,
   getLink,
-  deleteLink,
   getLinkClicks,
   getLinkStats,
 } from "@controllers/links.controller";
+import { apiLimiter, createLinkLimiter } from "@middleware/rateLimit.middleware";
 import {
-  validateUrlMiddleware,
   validateCustomCode,
   validateShortCodeParam,
+  validateUrlMiddleware,
 } from "@middleware/validate.middleware";
-import { apiLimiter, createLinkLimiter } from "@middleware/rateLimit.middleware";
+import { Router } from "express";
 
 const router = Router();
 

@@ -1,7 +1,7 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { StatsView } from "@components/stats/StatsView";
 import { Button } from "@components/common/Button";
+import { StatsView } from "@components/stats/StatsView";
 import { useLinkDetails } from "@hooks/useLinks";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function Stats() {
   const { shortCode } = useParams<{ shortCode: string }>();
@@ -39,6 +39,7 @@ export function Stats() {
 function BackIcon() {
   return (
     <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <title>Back Icon</title>
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
     </svg>
   );
