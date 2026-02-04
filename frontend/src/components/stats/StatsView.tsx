@@ -3,7 +3,6 @@ import { Card } from "@components/common/Card";
 import { ClicksChart } from "@components/stats/ClicksChart";
 import { ClicksTable } from "@components/stats/ClicksTable";
 import { formatNumber, truncateUrl } from "@utils/formatters";
-import { buildShortUrl } from "@utils/generateShortCode";
 
 interface StatsViewProps {
   link: Link;
@@ -12,7 +11,7 @@ interface StatsViewProps {
 }
 
 export function StatsView({ link, clicks, chartData }: StatsViewProps) {
-  const shortUrl = buildShortUrl(link.short_code);
+  const shortUrl = link.short_url;
 
   return (
     <div className="space-y-4">

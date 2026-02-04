@@ -3,6 +3,7 @@
 export interface Link {
   id: string;
   short_code: string;
+  short_url: string;
   original_url: string;
   created_at: string;
   total_clicks: number;

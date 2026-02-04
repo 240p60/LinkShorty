@@ -4,7 +4,6 @@ import { Card } from "@components/common/Card";
 import { CopyButton } from "@components/common/CopyButton";
 import { Input } from "@components/common/Input";
 import { useTelegram } from "@hooks/useTelegram";
-import { buildShortUrl } from "@utils/generateShortCode";
 import { validateUrl } from "@utils/validators";
 import { type FormEvent, useCallback, useState } from "react";
 
@@ -52,7 +51,7 @@ export function LinkGenerator({ onCreateLink }: LinkGeneratorProps) {
     [url, customCode, onCreateLink, haptic],
   );
 
-  const shortUrl = createdLink ? buildShortUrl(createdLink.short_code) : "";
+  const shortUrl = createdLink ? createdLink.short_url : "";
 
   return (
     <Card className="space-y-4">

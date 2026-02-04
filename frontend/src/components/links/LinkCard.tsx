@@ -4,7 +4,6 @@ import { Card } from "@components/common/Card";
 import { CopyButton } from "@components/common/CopyButton";
 import { useTelegram } from "@hooks/useTelegram";
 import { formatNumber, getRelativeTime, truncateUrl } from "@utils/formatters";
-import { buildShortUrl } from "@utils/generateShortCode";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +15,7 @@ interface LinkCardProps {
 export function LinkCard({ link, onDelete }: LinkCardProps) {
   const navigate = useNavigate();
   const { haptic, confirm, share } = useTelegram();
-  const shortUrl = buildShortUrl(link.short_code);
+  const shortUrl = link.short_url;
 
   const handleDelete = useCallback(async () => {
     const confirmed = await confirm("Вы уверены, что хотите удалить эту ссылку?");
