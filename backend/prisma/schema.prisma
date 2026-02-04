@@ -7,14 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          String   @id
+  telegramId  BigInt   @unique @map("telegram_id")
+  username    String?
+  firstName   String   @map("first_name")
+  lastName    String?  @map("last_name")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  links       Link[]
+  
+  @@map("users")
+}
+
 model Link {
   id           String   @id @default(uuid())
+  userId       String   @map("user_id")
+  user         User     @relation(fields: [userId], references: [id])
   shortCode    String   @unique @map("short_code")
   originalUrl  String   @map("original_url")
   createdAt    DateTime @default(now()) @map("created_at")
   totalClicks  Int      @default(0) @map("total_clicks")
   uniqueClicks Int      @default(0) @map("unique_clicks")
 
+  @@index([userId])
   @@index([shortCode])
   @@index([createdAt])
   @@map("links")
