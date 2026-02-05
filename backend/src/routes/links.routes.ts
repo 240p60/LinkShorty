@@ -6,6 +6,7 @@ import {
   getLinkClicks,
   getLinkStats,
 } from "@controllers/links.controller";
+import { authMiddleware } from "@middleware/auth.middleware";
 import { apiLimiter, createLinkLimiter } from "@middleware/rateLimit.middleware";
 import {
   validateCustomCode,
@@ -15,6 +16,9 @@ import {
 import { Router } from "express";
 
 const router = Router();
+
+// Apply authentication to all routes
+router.use(authMiddleware);
 
 // Apply rate limiting to all routes
 router.use(apiLimiter);
