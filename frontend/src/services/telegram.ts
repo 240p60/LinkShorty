@@ -39,7 +39,9 @@ export function hapticFeedback(
 }
 
 export function shareLink(url: string, text?: string): void {
-  const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}${text ? `&text=${encodeURIComponent(text)}` : ""}`;
+  const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}${
+    text ? `&text=${encodeURIComponent(text)}` : ""
+  }`;
   WebApp.openTelegramLink(shareUrl);
 }
 
@@ -53,6 +55,10 @@ export function closeMiniApp(): void {
 
 export function isRunningInTelegram(): boolean {
   return Boolean(WebApp.initData);
+}
+
+export function getInitData(): string {
+  return WebApp.initData;
 }
 
 export { WebApp };

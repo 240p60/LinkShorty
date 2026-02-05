@@ -2,6 +2,8 @@
  * API Service - Centralized API request handler
  */
 
+import { getInitData, isRunningInTelegram } from "./telegram";
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
 
 interface RequestOptions extends RequestInit {
@@ -33,6 +35,12 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
     "Content-Type": "application/json",
     ...fetchOptions.headers,
   };
+
+  // Add Telegram auth header if running in Telegram
+  if (isRunningInTelegram()) {
+    const initData = getInitData();
+    headers["Authorization" as keyof HeadersInit] = `tma ${initData}`;
+  }
 
   const response = await fetch(url, {
     ...fetchOptions,
