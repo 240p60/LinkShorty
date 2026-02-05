@@ -18,6 +18,10 @@ const prisma = new PrismaClient();
  */
 export async function createLink(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    if (!req.user) {
+      res.status(401).json({ error: "Пользователь не авторизован" });
+      return;
+    }
     if (!req.sanitizedUrl) {
       res.status(400).json({ error: "URL обязателен" });
       return;
@@ -33,6 +37,7 @@ export async function createLink(req: Request, res: Response, next: NextFunction
       data: {
         shortCode,
         originalUrl,
+        userId: req.user.id,
       },
     });
 
@@ -59,16 +64,21 @@ export async function createLink(req: Request, res: Response, next: NextFunction
  */
 export async function getAllLinks(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    if (!req.user) {
+      res.status(401).json({ error: "Пользователь не авторизован" });
+      return;
+    }
     const limit = Math.min(Number.parseInt(req.query.limit as string, 10) || 50, 100);
     const offset = Number.parseInt(req.query.offset as string, 10) || 0;
 
     const [links, total] = await Promise.all([
       prisma.link.findMany({
+        where: { userId: req.user.id },
         orderBy: { createdAt: "desc" },
         skip: offset,
         take: limit,
       }),
-      prisma.link.count(),
+      prisma.link.count({ where: { userId: req.user.id } }),
     ]);
 
     res.json({
@@ -96,13 +106,17 @@ export async function getAllLinks(req: Request, res: Response, next: NextFunctio
  */
 export async function getLink(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    if (!req.user) {
+      res.status(401).json({ error: "Пользователь не авторизован" });
+      return;
+    }
     const { shortCode } = req.params;
 
     const link = await prisma.link.findUnique({
       where: { shortCode },
     });
 
-    if (!link) {
+    if (!link || link.userId !== req.user.id) {
       res.status(404).json({
         error: "Ссылка не найдена",
       });
@@ -129,7 +143,21 @@ export async function getLink(req: Request, res: Response, next: NextFunction): 
  */
 export async function deleteLink(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    if (!req.user) {
+      res.status(401).json({ error: "Пользователь не авторизован" });
+      return;
+    }
     const { shortCode } = req.params;
+
+    // Verify link exists and belongs to user
+    const link = await prisma.link.findUnique({
+      where: { shortCode },
+    });
+
+    if (!link || link.userId !== req.user.id) {
+      res.status(404).json({ error: "Ссылка не найдена" });
+      return;
+    }
 
     // Delete link from PostgreSQL
     await prisma.link.delete({
@@ -158,16 +186,20 @@ export async function getLinkClicks(
   next: NextFunction,
 ): Promise<void> {
   try {
+    if (!req.user) {
+      res.status(401).json({ error: "Пользователь не авторизован" });
+      return;
+    }
     const { shortCode } = req.params;
     const limit = Math.min(Number.parseInt(req.query.limit as string, 10) || 50, 100);
     const offset = Number.parseInt(req.query.offset as string, 10) || 0;
 
-    // Verify link exists
+    // Verify link exists and belongs to user
     const link = await prisma.link.findUnique({
       where: { shortCode },
     });
 
-    if (!link) {
+    if (!link || link.userId !== req.user.id) {
       res.status(404).json({
         error: "Ссылка не найдена",
       });
@@ -187,15 +219,19 @@ export async function getLinkClicks(
  */
 export async function getLinkStats(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    if (!req.user) {
+      res.status(401).json({ error: "Пользователь не авторизован" });
+      return;
+    }
     const { shortCode } = req.params;
     const days = Math.min(Number.parseInt(req.query.days as string, 10) || 7, 30);
 
-    // Verify link exists and get current stats
+    // Verify link exists and belongs to user
     const link = await prisma.link.findUnique({
       where: { shortCode },
     });
 
-    if (!link) {
+    if (!link || link.userId !== req.user.id) {
       res.status(404).json({
         error: "Ссылка не найдена",
       });
