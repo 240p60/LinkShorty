@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-import crypto from 'node:crypto';
-import type { NextFunction, Request, Response } from 'express';
-import type { TelegramUser } from '../types/express';
+import crypto from "node:crypto";
+import { PrismaClient } from "@prisma/client";
+import type { NextFunction, Request, Response } from "express";
+import type { TelegramUser } from "../types/express";
 
 const prisma = new PrismaClient();
 
@@ -14,14 +14,14 @@ const prisma = new PrismaClient();
 function validateInitData(initData: string, botToken: string): boolean {
   try {
     const params = new URLSearchParams(initData);
-    const hash = params.get('hash');
+    const hash = params.get("hash");
 
     if (!hash) {
       return false;
     }
 
     // Remove hash from params and sort alphabetically
-    params.delete('hash');
+    params.delete("hash");
     const dataCheckArr: string[] = [];
 
     params.forEach((value, key) => {
@@ -29,16 +29,16 @@ function validateInitData(initData: string, botToken: string): boolean {
     });
 
     dataCheckArr.sort();
-    const dataCheckString = dataCheckArr.join('\n');
+    const dataCheckString = dataCheckArr.join("\n");
 
     // Create secret key using HMAC-SHA256 with "WebAppData" as key
-    const secretKey = crypto.createHmac('sha256', 'WebAppData').update(botToken).digest();
+    const secretKey = crypto.createHmac("sha256", "WebAppData").update(botToken).digest();
 
     // Calculate hash
     const calculatedHash = crypto
-      .createHmac('sha256', secretKey)
+      .createHmac("sha256", secretKey)
       .update(dataCheckString)
-      .digest('hex');
+      .digest("hex");
 
     return calculatedHash === hash;
   } catch {
@@ -54,7 +54,7 @@ function validateInitData(initData: string, botToken: string): boolean {
 function parseUserFromInitData(initData: string): TelegramUser | null {
   try {
     const params = new URLSearchParams(initData);
-    const userParam = params.get('user');
+    const userParam = params.get("user");
 
     if (!userParam) {
       return null;
@@ -82,24 +82,24 @@ function parseUserFromInitData(initData: string): TelegramUser | null {
 export async function authMiddleware(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> {
   try {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
       res.status(401).json({
-        error: 'Требуется авторизация',
+        error: "Требуется авторизация",
       });
       return;
     }
 
     // Parse "tma <initData>" format
-    const [scheme, initData] = authHeader.split(' ', 2);
+    const [scheme, initData] = authHeader.split(" ", 2);
 
-    if (scheme?.toLowerCase() !== 'tma' || !initData) {
+    if (scheme?.toLowerCase() !== "tma" || !initData) {
       res.status(401).json({
-        error: 'Неверный формат авторизации. Ожидается: tma <initData>',
+        error: "Неверный формат авторизации. Ожидается: tma <initData>",
       });
       return;
     }
@@ -108,9 +108,9 @@ export async function authMiddleware(
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
 
     if (!botToken) {
-      console.error('TELEGRAM_BOT_TOKEN is not configured');
+      console.error("TELEGRAM_BOT_TOKEN is not configured");
       res.status(500).json({
-        error: 'Ошибка конфигурации сервера',
+        error: "Ошибка конфигурации сервера",
       });
       return;
     }
@@ -118,7 +118,7 @@ export async function authMiddleware(
     // Validate initData
     if (!validateInitData(initData, botToken)) {
       res.status(401).json({
-        error: 'Недействительные данные авторизации',
+        error: "Недействительные данные авторизации",
       });
       return;
     }
@@ -128,7 +128,7 @@ export async function authMiddleware(
 
     if (!telegramUser) {
       res.status(401).json({
-        error: 'Не удалось получить данные пользователя',
+        error: "Не удалось получить данные пользователя",
       });
       return;
     }
@@ -160,9 +160,9 @@ export async function authMiddleware(
 
     next();
   } catch (error) {
-    console.error('Auth middleware error:', error);
+    console.error("Auth middleware error:", error);
     res.status(500).json({
-      error: 'Ошибка авторизации',
+      error: "Ошибка авторизации",
     });
   }
 }
@@ -174,7 +174,7 @@ export async function authMiddleware(
 export async function optionalAuthMiddleware(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> {
   const authHeader = req.headers.authorization;
 
